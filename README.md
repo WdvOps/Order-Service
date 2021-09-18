@@ -1,5 +1,7 @@
 # Order-Service
-Sistema desenvolvido durante o curso Fullstack Developer como o professor Valdir Cesar
+Sistema desenvolvido durante o curso Fullstack Developer com o professor Valdir Cesar 
+
+5 seções • 59 aulas • Duração total: 10h 51m
 
 #  O que aprendemos?
 
