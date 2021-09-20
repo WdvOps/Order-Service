@@ -1,0 +1,5 @@
+package com.will.os.resources.exceptions;
+
+public class StandarError {
+
+}
