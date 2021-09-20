@@ -47,8 +47,6 @@ public class TecnicoResource {
 		for (Tecnico obj : list) {
 			listDTO.add(new TecnicoDTO(obj));
 		}
-
-		list.forEach(obj -> listDTO.add(new TecnicoDTO(obj)));
 		
 		return ResponseEntity.ok().body(listDTO);
 	}
