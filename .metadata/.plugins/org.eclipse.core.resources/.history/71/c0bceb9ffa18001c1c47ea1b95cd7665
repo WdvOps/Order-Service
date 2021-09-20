@@ -1,9 +1,0 @@
-package com.will.os.resources.exceptions;
-
-public class StandardError {
-
-	private Long timestamp;
-	private Integer status;
-	private String error;
-	private StandardError
-}

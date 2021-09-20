@@ -1,5 +1,0 @@
-package com.will.os.repositories;
-
-public interface TecnicoRepository {
-
-}
