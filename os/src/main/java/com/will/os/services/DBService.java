@@ -3,7 +3,7 @@ package com.will.os.services;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+
 import org.springframework.stereotype.Service;
 
 import com.will.os.domain.Cliente;
