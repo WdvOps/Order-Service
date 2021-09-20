@@ -3,7 +3,6 @@ package com.will.os.resources;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +32,8 @@ public class TecnicoResource {
 	@GetMapping
 	public ResponseEntity<List<TecnicoDTO>> findAll() {
 
-		
+		// List<TecnicoDTO> listDTO = service.findAll().stream().map(obj -> new
+		// TecnicoDTO(obj)).collect(Collectors.toList());
 
 		List<Tecnico> list = service.findAll();
 		List<TecnicoDTO> listDTO = new ArrayList<>();
@@ -43,9 +43,5 @@ public class TecnicoResource {
 		}
 
 		list.forEach(obj -> listDTO.add(new TecnicoDTO(obj)));
-		
-		return ResponseEntity.ok().body(listDTO);
 	}
-	
-	
 }

@@ -2,7 +2,7 @@ package com.will.os.resources;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,19 +33,18 @@ public class TecnicoResource {
 	@GetMapping
 	public ResponseEntity<List<TecnicoDTO>> findAll() {
 
-		
+		 List<TecnicoDTO> listDTO = service.findAll().stream().map(obj -> new
+		 TecnicoDTO(obj)).collect(Collectors.toList());
 
-		List<Tecnico> list = service.findAll();
-		List<TecnicoDTO> listDTO = new ArrayList<>();
+		//List<Tecnico> list = service.findAll();
+		//List<TecnicoDTO> listDTO = new ArrayList<>();
 
-		for (Tecnico obj : list) {
-			listDTO.add(new TecnicoDTO(obj));
-		}
+		//for (Tecnico obj : list) {
+		//	listDTO.add(new TecnicoDTO(obj));
+		//}
 
-		list.forEach(obj -> listDTO.add(new TecnicoDTO(obj)));
+		//list.forEach(obj -> listDTO.add(new TecnicoDTO(obj)));
 		
 		return ResponseEntity.ok().body(listDTO);
 	}
-	
-	
 }
