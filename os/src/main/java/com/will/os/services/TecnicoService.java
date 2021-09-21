@@ -31,7 +31,9 @@ public class TecnicoService {
 	}
 	
 	public Tecnico create(TecnicoDTO objDTO) {
+		
 		if(findByCPF(objDTO) != null) {
+			
 			throw new DataIntegratyViolationException("CPF já cadastrado na base de dados!");
 		}
 		
