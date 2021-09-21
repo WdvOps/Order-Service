@@ -1,8 +1,7 @@
 package com.will.os.resources;
 
-import java.util.ArrayList;
-
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -19,74 +18,73 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-
-import com.will.os.domain.Tecnico;
-import com.will.os.dtos.TecnicoDTO;
-import com.will.os.services.TecnicoService;
+import com.will.os.domain.Cliente;
+import com.will.os.dtos.ClienteDTO;
+import com.will.os.services.ClienteService;
 
 @RestController
-@RequestMapping(value = "/tecnicos")
-public class TecnicoResource {
+@RequestMapping(value = "/clientes")
+public class ClienteResource {
 
 	@Autowired
-	private TecnicoService service;
+	private ClienteService service;
 	
 	/*
-	 * Busca técnico por id
+	 * Busca cliente por id
 	 */
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<TecnicoDTO> findById(@PathVariable Integer id) {
+	public ResponseEntity<ClienteDTO> findById(@PathVariable Integer id) {
 
-		Tecnico obj = service.findById(id);
-		TecnicoDTO objDTO = new TecnicoDTO(obj);
+		Cliente obj = service.findById(id);
+		ClienteDTO objDTO = new ClienteDTO(obj);
 		return ResponseEntity.ok().body(objDTO);
 	}
 	
 	/*
-	 * Lista todos os técnicos
+	 * Lista todos os clientes
 	 */
 
 	@GetMapping
-	public ResponseEntity<List<TecnicoDTO>> findAll() {
+	public ResponseEntity<List<ClienteDTO>> findAll() {
 
 		
 
-		List<Tecnico> list = service.findAll();
-		List<TecnicoDTO> listDTO = new ArrayList<>();
+		List<Cliente> list = service.findAll();
+		List<ClienteDTO> listDTO = new ArrayList<>();
 
-		for (Tecnico obj : list) {
-			listDTO.add(new TecnicoDTO(obj));
+		for (Cliente obj : list) {
+			listDTO.add(new ClienteDTO(obj));
 		}
 		
 		return ResponseEntity.ok().body(listDTO);
 	}
 	
 	/*
-	 * Cria novo técnico com validação de campos e excessões 
+	 * Cria novo cliente com validação de campos e excessões 
 	 */
 	
 	@PostMapping
-	public ResponseEntity<TecnicoDTO> create(@Valid @RequestBody TecnicoDTO objDTO) {
-		Tecnico newObj = service.create(objDTO);
+	public ResponseEntity<ClienteDTO> create(@Valid @RequestBody ClienteDTO objDTO) {
+		Cliente newObj = service.create(objDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
 		
 		return ResponseEntity.created(uri).build();
 	}
 	
 	/*
-	 * Atualiza técnico com validação de campos e excessões
+	 * Atualiza cliente com validação de campos e excessões
 	 */
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<TecnicoDTO> update(@PathVariable Integer id, @Valid @RequestBody TecnicoDTO objDTO) {
-		TecnicoDTO newObj = new TecnicoDTO(service.update(id, objDTO));
+	public ResponseEntity<ClienteDTO> update(@PathVariable Integer id, @Valid @RequestBody ClienteDTO objDTO) {
+		ClienteDTO newObj = new ClienteDTO(service.update(id, objDTO));
 		
 		return ResponseEntity.ok().body(newObj);
 	}
 	
 	/*
-	 * Deleta técnico
+	 * Deleta cliente
 	 */
 	
 	@DeleteMapping(value = "/{id}")

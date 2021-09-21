@@ -1,61 +1,60 @@
 package com.will.os.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.will.os.domain.Cliente;
 import com.will.os.domain.Pessoa;
-import com.will.os.domain.Tecnico;
-import com.will.os.dtos.TecnicoDTO;
+import com.will.os.dtos.ClienteDTO;
+import com.will.os.repositories.ClienteRepository;
 import com.will.os.repositories.PessoaRepository;
-import com.will.os.repositories.TecnicoRepository;
 import com.will.os.services.exceptions.DataIntegratyViolationException;
 import com.will.os.services.exceptions.ObjectNotFoundException;
 
 @Service
-public class TecnicoService {
+public class ClienteService {
 	
 	@Autowired
-	private TecnicoRepository repository;
+	private ClienteRepository repository;
 	
 	@Autowired
 	private PessoaRepository pessoarepository;
 	
-	//Busca de técnico por ID
+	//Busca de cliente por ID
 	
-	public Tecnico findById(Integer id ) {
+	public Cliente findById(Integer id ) {
 		
-		Optional<Tecnico> obj = repository.findById(id);
+		Optional<Cliente> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + Tecnico.class.getName()));
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
 	}
 
-	public List<Tecnico> findAll() {
+	public List<Cliente> findAll() {
 		
 		return repository.findAll();
 	}
 	
-	//Criação de novo técnico com regra de não duplicidade de CPF
+	//Criação de novo cliente com regra de não duplicidade de CPF
 	
-	public Tecnico create(TecnicoDTO objDTO) {
+	public Cliente create(ClienteDTO objDTO) {
 		
 		if(findByCPF(objDTO) != null) {
 			
 			throw new DataIntegratyViolationException("CPF já cadastrado na base de dados!");
 		}
 		
-		return repository.save(new Tecnico(null, objDTO.getNome(), objDTO.getCpf(), objDTO.getTelefone()));
+		return repository.save(new Cliente(null, objDTO.getNome(), objDTO.getCpf(), objDTO.getTelefone()));
 	}
 	
-	//Atualização de dados do técnico
+	//Atualização de dados do cliente
 	
-	public Tecnico update(Integer id, @Valid TecnicoDTO objDTO) {
-		Tecnico oldObj = findById(id);
+	public Cliente update(Integer id, @Valid ClienteDTO objDTO) {
+		Cliente oldObj = findById(id);
 		
 		if(findByCPF(objDTO) != null && findByCPF(objDTO).getId() != id) {
 			throw new  DataIntegratyViolationException("CPF já cadastrado na base de dados");
@@ -69,10 +68,10 @@ public class TecnicoService {
 	
 	}
 	
-	// Deleta técnico 
+	// Deleta cliente 
 	
 	public void delete(Integer id) {
-		Tecnico obj = findById(id);
+		Cliente obj = findById(id);
 		if(obj.getList().size() > 0) {
 			
 			throw new DataIntegratyViolationException("Técnico possui ordens de serviços e não pode ser deletado!");
@@ -82,9 +81,9 @@ public class TecnicoService {
 		
 	}
 	
-	// Busca de técnico pelo CPF
+	// Busca de cliente pelo CPF
 	
-	private Pessoa findByCPF(TecnicoDTO objDTO) {
+	private Pessoa findByCPF(ClienteDTO objDTO) {
 		
 		Pessoa obj = pessoarepository.findByCPF(objDTO.getCpf());
 		

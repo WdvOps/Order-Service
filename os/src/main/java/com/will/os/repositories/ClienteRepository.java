@@ -5,9 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import com.will.os.domain.Cliente;
 
-
-
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 	
-}
+	
+
+	}
+ 
