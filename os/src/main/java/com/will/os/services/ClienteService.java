@@ -23,16 +23,19 @@ public class ClienteService {
 	private ClienteRepository repository;
 	
 	@Autowired
-	private PessoaRepository pessoarepository;
+	private PessoaRepository pessoaRepository2;
 	
 	//Busca de cliente por ID
 	
 	public Cliente findById(Integer id ) {
 		
 		Optional<Cliente> obj = repository.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
+		return obj.orElseThrow(() -> new ObjectNotFoundException ("Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
 	}
+	
+	/*
+	 * Busca todos os Clientes da base de dados
+	 */
 
 	public List<Cliente> findAll() {
 		
@@ -74,7 +77,7 @@ public class ClienteService {
 		Cliente obj = findById(id);
 		if(obj.getList().size() > 0) {
 			
-			throw new DataIntegratyViolationException("Técnico possui ordens de serviços e não pode ser deletado!");
+			throw new DataIntegratyViolationException("Pessoa possui ordens de serviços e não pode ser deletado!");
 		}
 		
 	    repository.deleteById(id);
@@ -85,7 +88,7 @@ public class ClienteService {
 	
 	private Pessoa findByCPF(ClienteDTO objDTO) {
 		
-		Pessoa obj = pessoarepository.findByCPF(objDTO.getCpf());
+		Pessoa obj = pessoaRepository2.findByCPF(objDTO.getCpf());
 		
 		if(obj != null) {
 			return obj;

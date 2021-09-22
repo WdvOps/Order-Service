@@ -1,10 +1,9 @@
 package com.will.os.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
-
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,9 +30,13 @@ public class TecnicoService {
 	public Tecnico findById(Integer id ) {
 		
 		Optional<Tecnico> obj = repository.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + Tecnico.class.getName()));
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Tecnico.class.getName()));
 	}
+	
+	/*
+	 * Busca todos os tecnicos da base de dados
+	 */
+
 
 	public List<Tecnico> findAll() {
 		

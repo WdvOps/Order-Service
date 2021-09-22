@@ -1,8 +1,8 @@
 package com.will.os.resources;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -28,7 +28,7 @@ public class ClienteResource {
 
 	@Autowired
 	private ClienteService service;
-	
+
 	/*
 	 * Busca cliente por id
 	 */
@@ -36,11 +36,11 @@ public class ClienteResource {
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<ClienteDTO> findById(@PathVariable Integer id) {
 
-		Cliente obj = service.findById(id);
-		ClienteDTO objDTO = new ClienteDTO(obj);
+		
+		ClienteDTO objDTO = new ClienteDTO(service.findById(id));
 		return ResponseEntity.ok().body(objDTO);
 	}
-	
+
 	/*
 	 * Lista todos os clientes
 	 */
@@ -48,49 +48,44 @@ public class ClienteResource {
 	@GetMapping
 	public ResponseEntity<List<ClienteDTO>> findAll() {
 
-		
+		List<ClienteDTO> listDTO = service.findAll().stream().map(obj -> new ClienteDTO(obj)).collect(Collectors.toList());
 
-		List<Cliente> list = service.findAll();
-		List<ClienteDTO> listDTO = new ArrayList<>();
-
-		for (Cliente obj : list) {
-			listDTO.add(new ClienteDTO(obj));
-		}
-		
 		return ResponseEntity.ok().body(listDTO);
 	}
-	
+
 	/*
-	 * Cria novo cliente com validação de campos e excessões 
+	 * Cria novo cliente com validação de campos e excessões (evita duplicidade de CPF)
 	 */
-	
+
 	@PostMapping
 	public ResponseEntity<ClienteDTO> create(@Valid @RequestBody ClienteDTO objDTO) {
-		Cliente newObj = service.create(objDTO);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
 		
+		Cliente newObj = service.create(objDTO);
+
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
+
 		return ResponseEntity.created(uri).build();
 	}
-	
+
 	/*
-	 * Atualiza cliente com validação de campos e excessões
+	 * Atualiza cliente com validação de campos e excessões (evita duplicidade de CPF)
 	 */
-	
+
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<ClienteDTO> update(@PathVariable Integer id, @Valid @RequestBody ClienteDTO objDTO) {
 		ClienteDTO newObj = new ClienteDTO(service.update(id, objDTO));
-		
+
 		return ResponseEntity.ok().body(newObj);
 	}
-	
+
 	/*
 	 * Deleta cliente
 	 */
-	
+
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
-		
+
 		return ResponseEntity.noContent().build();
 	}
 }
