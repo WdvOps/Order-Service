@@ -12,7 +12,9 @@ import com.will.os.domain.Pessoa;
 @Repository
 public interface PessoaRepository extends JpaRepository<Pessoa, Integer> {
 	
-	@Query("SELECT obj FROM Tecnico obj WHERE obj.cpf =:cpf")
+	@Query("SELECT obj FROM Pessoa obj WHERE obj.cpf =:cpf")
 	Pessoa findByCPF(@Param("cpf") String cpf);
 	
+	
 }
+
