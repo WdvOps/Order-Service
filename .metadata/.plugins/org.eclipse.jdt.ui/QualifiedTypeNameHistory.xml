@@ -51,8 +51,6 @@
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
     <fullyQualifiedTypeName name="javax.validation.constraints.NotEmpty"/>
     <fullyQualifiedTypeName name="javax.validation.Valid"/>
-    <fullyQualifiedTypeName name="com.will.os.domain.enuns.Prioridade"/>
-    <fullyQualifiedTypeName name="com.will.os.domain.enuns.Status"/>
     <fullyQualifiedTypeName name="com.will.os.domain.Tecnico"/>
     <fullyQualifiedTypeName name="com.will.os.domain.Cliente"/>
     <fullyQualifiedTypeName name="java.net.URI"/>
@@ -60,4 +58,6 @@
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PutMapping"/>
     <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.CrossOrigin"/>
+    <fullyQualifiedTypeName name="com.will.os.domain.enuns.Status"/>
+    <fullyQualifiedTypeName name="com.will.os.domain.enuns.Prioridade"/>
 </qualifiedTypeNameHistroy>
