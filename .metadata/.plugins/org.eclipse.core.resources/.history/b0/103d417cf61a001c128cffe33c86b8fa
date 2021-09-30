@@ -1,7 +1,0 @@
-package com.will.os.resources.exceptions;
-
-public class ValidationError extends StandardError {
-	
-	private static final long serialVersionUID = 1L;
-
-}

@@ -1,5 +1,0 @@
-package com.will.os.services.exceptions;
-
-public class DataIntegratyViolationException {
-
-}
